@@ -1,0 +1,253 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+a {
+    line-height: inherit;
+    color: #ffffff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#fullscreen-container {
+  position: fixed;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#fullscreen-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  transition: 0.6s ease;
+  border-radius: 3px;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.next {
+  right: 20px;
+}
+
+.prev {
+  left: 20px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Styles for the top bar */
+.top-bar {
+  position: fixed; /* Keeps the top bar fixed at the top of the viewport */
+  top: 0;
+  left: 0px;
+  width: 100%;
+  height: 75px;
+  background-color: rgb(28, 35, 51, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0px 4px 2px -2px gray;
+  z-index: 1000; /* Ensures it overlays the iframe */
+}
+
+
+.top-bar .logo,
+.top-bar .dataset-info,
+.top-bar #dataset-picker {
+    margin: 0 5%; /* Adds margin to the left and right of text elements */
+}
+
+.logo {
+  height: 50px;
+}
+
+#dataset-picker {
+  font-size: 16px;
+  padding: 5px;
+}
+
+.dataset-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.dataset-info li {
+  font-size: 14px;
+  color: #f7eded;
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+  background: #333;
+}
+
+.m-dropdown {
+  position: relative; /* Make the container relative */
+}
+
+.e-button {
+  transition: all .3s ease-in-out;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 30px 8px 15px;
+  z-index: 900;
+  color: #fff;
+  font-weight: 900;
+  position: relative;
+  border: 2px solid transparent;
+  margin-top: 2px;
+  font-family: 'Open Sans', sans-serif;
+  z-index: 5;
+  display: block;
+  width: auto;
+  margin: 0 auto;
+}
+
+.e-button:hover {
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0);
+  color: #669999;
+}
+
+.e-burger {
+  transition: all .3s ease-in-out;
+  position: absolute;
+  right: 15px;
+  width: 20px; /* Adjust width to fit three lines nicely */
+  height: 18px; /* Adjust height to fit three lines */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.e-burger span {
+  transition: all .2s ease-in-out;
+  position: absolute;
+  border-radius: 2px;
+  width: 100%;
+  height: 3px;
+  background: #fff;
+}
+
+.e-burger span:nth-child(1) {
+  top: 0;
+}
+
+.e-burger span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.e-burger span:nth-child(3) {
+  bottom: 0;
+}
+
+/* Adjust for the open state */
+.e-button.open .e-burger span:nth-child(1) {
+  transform: translateY(9px) rotate(-45deg);
+}
+
+.e-button.open .e-burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.e-button.open .e-burger span:nth-child(3) {
+  transform: translateY(-9px) rotate(45deg);
+}
+
+.e-button.open .e-burger:after {
+  height: 15px;
+  opacity: 1;
+}
+
+.e-list {
+  position: absolute;
+  top: 30px; /* Position it directly below the .top-bar */
+  left: -30px;
+  width: 100%; /* Make the dropdown as wide as the top bar */
+  min-width: 450px; /* Set a minimum width if needed */
+  display: none; /* Initially hidden */
+  z-index: 0; /* Ensure it appears below the burger icon */
+  background-color: #1c2333; /* Solid background color */
+}
+
+.e-list li {
+  display: block;
+  width: auto;
+  box-sizing: border-box;
+  opacity: 1; /* Ensure full opacity */
+}
+
+.e-list li:last-child {
+  border: none;
+}
+
+.e-list li a {
+  transition: all .3s ease-in-out;
+  padding: 20px;
+  float: left;
+  width: auto;
+  min-width: 100%; /* Ensures the dropdown is at least as wide as the button */
+  text-decoration: none;
+  color: #fff;
+  background-color: #1c2333; /* Solid background color */
+  font-weight: 600;
+  box-sizing: border-box;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.e-list li a:hover {
+  background: #1c2333;
+  color: #313849;
+}
+
+.e-button.open + .e-list {
+  opacity: 1 !important; /* Override any transparency applied during animation */
+}
+
+@media only screen and (max-width: 768px) {
+  .m-dropdown .e-button span a svg {
+    display: none;
+  }
+}
