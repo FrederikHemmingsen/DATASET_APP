@@ -2,7 +2,7 @@ let currentSlide = 0;
 const datasets = [
     {
         src: 'https://demo.nira.app/a/e0UBPCOHQXSGlOtvXLDTpQ/2',
-        headline: 'Dataset 1',
+        headline: 'P3 Concrete Factory',
         info: {
             flightHeight: '10m',
             gsd: '0.043 cm/pixel',
@@ -11,23 +11,83 @@ const datasets = [
         }
     },
     {
-        src: 'https://app.surveytransfer.net/file/59c4e795-d3a9-41cb-ac92-baf27e661191?shareKey=SVoo14tw9vXjvOn-92kTZTpFgllAj7fDZ94nfPu2WFk',
-        headline: 'Dataset 2',
-        info: {
-            flightHeight: '?m',
-            gsd: '? cm/pixel',
-            camera: 'P5 80mm',
-            speed: '15m m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/5d1c9468-1584-47be-b29b-a66fb9045fd4?shareKey=hPrbRaZihAOKNxOsngU95QUEBaboQw77nMY3biUBqxw',
-        headline: 'Dataset 3',
+        src: 'https://app.surveytransfer.net/file/4dd8140e-9496-47c2-b525-9a6e59c8b8ed?shareKey=SVoo14tw9vXjvOn-92kTZTpFgllAj7fDZ94nfPu2WFk',
+        headline: 'P5 Airport Ortho',
         info: {
             flightHeight: '60m',
             gsd: '0.259 cm/pixel',
             camera: 'P5 80mm',
             speed: '15m m/s'
+        }
+    },
+    {
+        src: 'https://app.surveytransfer.net/file/162172a0-1c03-4e0f-bf43-7e65b9d2f7de?shareKey=SVoo14tw9vXjvOn-92kTZTpFgllAj7fDZ94nfPu2WFk',
+        headline: 'P5 Airport Pointcloud',
+        info: {
+            flightHeight: '60m',
+            gsd: '0.259 cm/pixel',
+            camera: 'P5 80mm',
+            speed: '15m m/s'
+        }
+    },
+    {
+        src: 'https://app.surveytransfer.net/file/bc54dfcc-b242-49d9-8ad4-97056b513382?shareKey=w1UJ5ZjvXoZD9ANHTh7nuhjDlu4FvQO6E1ixpFJSbq4',
+        headline: 'P5 Open-pit mine Ortho',
+        info: {
+            flightHeight: '120m',
+            gsd: '1.183 cm/pixel',
+            camera: 'P5 35mm',
+            speed: '15m m/s'
+        }
+    },
+    {
+        src: 'https://app.surveytransfer.net/file/63aa4e7a-e284-4171-8511-5144078b9fa0?shareKey=w1UJ5ZjvXoZD9ANHTh7nuhjDlu4FvQO6E1ixpFJSbq4',
+        headline: 'P5 Open-pit mine Pointcloud',
+        info: {
+            flightHeight: '120m',
+            gsd: '1.183 cm/pixel',
+            camera: 'P5 35mm',
+            speed: '15m m/s'
+        }
+    },
+    {
+        src: 'https://app.surveytransfer.net/view/cff08841-b4bb-493e-a949-cc89a1ba9471?shareKey=FsirdLJgMdtOZ3NqdMkWauGuvfSZebQ-e3a7TjgpR8I',
+        headline: 'P5 Railway Pointcloud',
+        info: {
+            flightHeight: '60m',
+            gsd: '0.259 cm/pixel',
+            camera: 'P5 80mm',
+            speed: '22m m/s'
+        }
+    },
+    {
+        src: 'https://app.surveytransfer.net/file/5d1c9468-1584-47be-b29b-a66fb9045fd4?shareKey=hPrbRaZihAOKNxOsngU95QUEBaboQw77nMY3biUBqxw',
+        headline: 'P3 - Sommerland Fyn Ortho',
+        info: {
+            flightHeight: '60m',
+            gsd: '0.259 cm/pixel',
+            camera: 'P5 80mm',
+            speed: '4m m/s'
+        }
+    },
+    {
+        src: 'https://strrd.maps.arcgis.com/apps/instant/3dviewer/index.html?appid=d9a1dd6c8f754b5db853e120d7084d85',
+        headline: 'PAS880 Dover City',
+        info: {
+            flightHeight: '',
+            gsd: '',
+            camera: '',
+            speed: ''
+        }
+    },
+    {
+        src: 'https://www.arcgis.com/apps/webappviewer3d/index.html?id=a3ed3789ac054bf4b3b4baaaa427a8da',
+        headline: 'PAS880 Seattle City',
+        info: {
+            flightHeight: '',
+            gsd: '',
+            camera: '',
+            speed: ''
         }
     }
 ];
