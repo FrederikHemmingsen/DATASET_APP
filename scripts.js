@@ -31,7 +31,7 @@ const datasets = [
         }
     },
     {
-        src: 'https://app.surveytransfer.net/file/bc54dfcc-b242-49d9-8ad4-97056b513382?shareKey=w1UJ5ZjvXoZD9ANHTh7nuhjDlu4FvQO6E1ixpFJSbq4',
+        src: 'https://app.surveytransfer.net/file/e9b37471-74d9-4d2a-b654-c464ef3a8c83?shareKey=w1UJ5ZjvXoZD9ANHTh7nuhjDlu4FvQO6E1ixpFJSbq4',
         headline: 'P5 Open-pit mine Ortho',
         info: {
             flightHeight: '120m',
@@ -51,7 +51,7 @@ const datasets = [
         }
     },
     {
-        src: 'https://app.surveytransfer.net/view/cff08841-b4bb-493e-a949-cc89a1ba9471?shareKey=FsirdLJgMdtOZ3NqdMkWauGuvfSZebQ-e3a7TjgpR8I',
+        src: 'https://app.surveytransfer.net/file/15affe2a-0a55-4721-bc0e-918cf846a656?shareKey=FsirdLJgMdtOZ3NqdMkWauGuvfSZebQ-e3a7TjgpR8I',
         headline: 'P5 Railway Pointcloud',
         info: {
             flightHeight: '60m',
@@ -68,26 +68,6 @@ const datasets = [
             gsd: '0.259 cm/pixel',
             camera: 'P5 80mm',
             speed: '4m m/s'
-        }
-    },
-    {
-        src: 'https://strrd.maps.arcgis.com/apps/instant/3dviewer/index.html?appid=d9a1dd6c8f754b5db853e120d7084d85',
-        headline: 'PAS880 Dover City',
-        info: {
-            flightHeight: '',
-            gsd: '',
-            camera: '',
-            speed: ''
-        }
-    },
-    {
-        src: 'https://www.arcgis.com/apps/webappviewer3d/index.html?id=a3ed3789ac054bf4b3b4baaaa427a8da',
-        headline: 'PAS880 Seattle City',
-        info: {
-            flightHeight: '',
-            gsd: '',
-            camera: '',
-            speed: ''
         }
     }
 ];
@@ -153,6 +133,9 @@ document.addEventListener('DOMContentLoaded', function () {
     link.addEventListener('click', function () {
       list.style.display = 'none';
       button.classList.remove('open');
+
+
+
     });
   });
 });
@@ -164,7 +147,6 @@ function selectDataset(index) {
   updateFullScreenContent();
   updatePicker(); // Update the picker if needed
 }
-
 
 
 
