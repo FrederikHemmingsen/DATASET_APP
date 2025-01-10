@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhaseOne Viewer Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #ffffff;
+        }
+
+        code {
+            background: #333333;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #00bcd4;
+        }
+
+        pre {
+            background: #333333;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            color: #e0e0e0;
+        }
+
+        a {
+            color: #64b5f6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .highlight {
+            background: #263238;
+            padding: 10px;
+            border-left: 4px solid #00bcd4;
+            margin: 10px 0;
+        }
+
+        .iframe-guide {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+
+        .iframe-guide h3 {
+            color: #bbdefb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>PhaseOne Viewer Documentation</h1>
+
+        <h2>Overview</h2>
+        <p>The PhaseOne Viewer provides a interface to explore and interact with datasets dynamically. This
+            documentation outlines the new features, changes, and usage instructions for the viewer.</p>
+
+        <h2>New Features</h2>
+        <ul>
+            <li><strong>Dynamic Info Popup:</strong> Displays detailed information about datasets, including video
+                embeds and actionable buttons.</li>
+            <li><strong>Buttons for Download and Case Stories:</strong> Links for dataset downloads and case studies
+                appear dynamically if available.</li>
+            <li><strong>YouTube Video Embed:</strong> Displays a video related to the dataset, if configured in the
+                <code>datasets.js</code> file.
+            </li>
+            <li><strong>Improved URL Parameters:</strong> Supports toggling the info popup using
+                <code>&info=true</code> in the URL.
+            </li>
+            <li><strong>Interactive Close:</strong> Info popup and menu close automatically when clicking outside their
+                respective areas.</li>
+        </ul>
+
+        <h2>How to Use</h2>
+
+        <h3>Dataset Filtering</h3>
+        <p>Use the following URL parameters to filter datasets:</p>
+        <ul>
+            <li><code>?filter=all</code> - Shows all datasets (default).</li>
+            <li><code>?filter=p3</code> - Shows only P3 datasets.</li>
+            <li><code>?filter=p5</code> - Shows only P5 datasets.</li>
+
+        </ul>
+
+        <h3>Info Popup</h3>
+        <p>The info popup can be toggled dynamically:</p>
+        <ul>
+            <li>Add <code>&info=true</code> to the URL to display the info popup on page load.</li>
+            <li>Click the <strong>Info</strong> button in the top bar to open it manually.</li>
+        </ul>
+
+        <h3>Embedding the Viewer</h3>
+        <p>The viewer can be embedded on any webpage using an iframe. Below are the steps and examples:</p>
+
+        <div class="iframe-guide">
+            <h3>Basic Embedding</h3>
+            <p>Use the following iframe code to embed the viewer:</p>
+            <pre><code>&lt;iframe src="https://showmethedata.phaseone.com?filter=p3" 
+    width="100%" height="500" frameborder="0"&gt;&lt;/iframe&gt;</code></pre>
+
+            <h3>Advanced Embedding with Parameters</h3>
+            <p>Customize the viewer experience by adding URL parameters:</p>
+            <ul>
+                <li><code>?filter=p3</code>: Display only P3 datasets.</li>
+                <li><code>?filter=p5</code>: Display only P5 datasets.</li>
+                <li><code>?info=true</code>: Automatically open the info popup.</li>
+                <li><code>?id=example-dataset</code>: Directly display a specific dataset.</li>
+            </ul>
+
+            <p>Example with multiple parameters:</p>
+            <pre><code>&lt;iframe src="https://showmethedata.phaseone.com?filter=p5&id=Town-Roof" 
+    width="100%" height="600" frameborder="0"&gt;&lt;/iframe&gt;</code></pre>
+            <h3>Result</h3>
+
+
+            <iframe src="https://showmethedata.phaseone.com?filter=p5&id=Town-Roof" width="100%" height="600"
+                frameborder="0"></iframe>
+
+
+            <h3>Styling and Responsiveness</h3>
+            <p>To make the iframe responsive, use the following CSS:</p>
+            <pre><code>.responsive-iframe {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.responsive-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}</code></pre>
+
+        </div>
+</body>
+
+</html>

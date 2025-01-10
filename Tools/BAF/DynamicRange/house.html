@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Responsive Image Compare Viewer</title>
+  <!-- Image Compare Viewer CSS -->
+  <link rel="stylesheet" href="../image-compare-viewer.min.css">
+
+  <!-- Preload Images -->
+  <link rel="preload" as="image" href="1.jpg">
+  <link rel="preload" as="image" href="2.jpg">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      /* Prevent scrolling */
+    }
+
+    #image-compare {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Image Compare Viewer Container -->
+  <div id="image-compare">
+    <img id="before-image" src="1.jpg" alt="Before">
+    <img id="after-image" src="2.jpg" alt="After">
+  </div>
+
+  <!-- Image Compare Viewer JS -->
+  <script src="../image-compare-viewer.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const beforeImage = document.getElementById('before-image');
+      const afterImage = document.getElementById('after-image');
+
+      // Ensure both images are fully loaded before initializing the slider
+      const preloadImages = [beforeImage, afterImage];
+      let loadedCount = 0;
+
+      preloadImages.forEach(img => {
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === preloadImages.length) {
+            initializeSlider();
+          }
+        };
+        img.onerror = () => {
+          console.error(`Failed to load image: ${img.src}`);
+        };
+      });
+
+      function initializeSlider() {
+        const element = document.getElementById('image-compare');
+        new ImageCompare(element, {
+          controlColor: "#FFFFFF",
+          addCircle: true,
+          showLabels: true,
+          smoothing: true,
+          startingPoint: 50,
+          fluidMode: true, // Ensures responsiveness
+        }).mount();
+      }
+    });
+  </script>
+</body>
+
+</html>

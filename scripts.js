@@ -1,157 +1,259 @@
 let currentSlide = 0;
-const datasets = [
-    {
-        src: 'https://demo.nira.app/a/e0UBPCOHQXSGlOtvXLDTpQ/2',
-        headline: 'P3 Concrete Factory',
-        info: {
-            flightHeight: '10m',
-            gsd: '0.043 cm/pixel',
-            camera: 'GS120',
-            speed: '3 m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/4dd8140e-9496-47c2-b525-9a6e59c8b8ed?shareKey=SVoo14tw9vXjvOn-92kTZTpFgllAj7fDZ94nfPu2WFk',
-        headline: 'P5 Airport Ortho',
-        info: {
-            flightHeight: '60m',
-            gsd: '0.259 cm/pixel',
-            camera: 'P5 80mm',
-            speed: '15m m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/162172a0-1c03-4e0f-bf43-7e65b9d2f7de?shareKey=SVoo14tw9vXjvOn-92kTZTpFgllAj7fDZ94nfPu2WFk',
-        headline: 'P5 Airport Pointcloud',
-        info: {
-            flightHeight: '60m',
-            gsd: '0.259 cm/pixel',
-            camera: 'P5 80mm',
-            speed: '15m m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/e9b37471-74d9-4d2a-b654-c464ef3a8c83?shareKey=w1UJ5ZjvXoZD9ANHTh7nuhjDlu4FvQO6E1ixpFJSbq4',
-        headline: 'P5 Open-pit mine Ortho',
-        info: {
-            flightHeight: '120m',
-            gsd: '1.183 cm/pixel',
-            camera: 'P5 35mm',
-            speed: '15m m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/63aa4e7a-e284-4171-8511-5144078b9fa0?shareKey=w1UJ5ZjvXoZD9ANHTh7nuhjDlu4FvQO6E1ixpFJSbq4',
-        headline: 'P5 Open-pit mine Pointcloud',
-        info: {
-            flightHeight: '120m',
-            gsd: '1.183 cm/pixel',
-            camera: 'P5 35mm',
-            speed: '15m m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/15affe2a-0a55-4721-bc0e-918cf846a656?shareKey=FsirdLJgMdtOZ3NqdMkWauGuvfSZebQ-e3a7TjgpR8I',
-        headline: 'P5 Railway Pointcloud',
-        info: {
-            flightHeight: '60m',
-            gsd: '0.259 cm/pixel',
-            camera: 'P5 80mm',
-            speed: '22m m/s'
-        }
-    },
-    {
-        src: 'https://app.surveytransfer.net/file/5d1c9468-1584-47be-b29b-a66fb9045fd4?shareKey=hPrbRaZihAOKNxOsngU95QUEBaboQw77nMY3biUBqxw',
-        headline: 'P3 - Sommerland Fyn Ortho',
-        info: {
-            flightHeight: '60m',
-            gsd: '0.259 cm/pixel',
-            camera: 'P5 80mm',
-            speed: '4m m/s'
+let filteredDatasets = [];
+
+// Variables for tracking dataset viewing duration
+let currentDataset = null;
+let datasetStartTime = null;
+
+// Helper function to get URL parameters
+function getURLParameter(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+}
+
+// Apply the current filter based on URL parameters
+function applyFilter() {
+    const filterParam = getURLParameter('filter') || 'all';
+    if (filterParam === 'all') {
+        filteredDatasets = datasets.filter(d => d.type === 'p3' || d.type === 'p5');
+    } else if (filterParam === 'p3') {
+        filteredDatasets = datasets.filter(d => d.type === 'p3');
+    } else if (filterParam === 'p5') {
+        filteredDatasets = datasets.filter(d => d.type === 'p5');
+    } else if (filterParam === 'hidden') {
+        filteredDatasets = datasets.filter(d => d.type === 'hidden');
+    } else {
+        filteredDatasets = datasets.filter(d => d.type === 'p3' || d.type === 'p5'); // Default to P3 and P5
+    }
+}
+
+// Populate the dropdown menu dynamically
+function populateDropdown() {
+    const list = document.getElementById('dataset-list');
+    list.innerHTML = '';
+    filteredDatasets.forEach((data, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#" data-index="${index}">${data.headline}</a>`;
+        list.appendChild(li);
+    });
+
+    // Attach event listeners to dropdown links
+    document.querySelectorAll('#dataset-list a').forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const index = parseInt(event.target.getAttribute('data-index'), 10);
+            selectDataset(index);
+        });
+    });
+}
+
+// Update the iframe content based on the current dataset
+function updateFullScreenContent() {
+    if (filteredDatasets.length === 0) return;
+
+    const dataset = filteredDatasets[currentSlide];
+    const iframe = document.getElementById('fullscreen-iframe');
+    if (iframe) {
+        iframe.src = dataset.src;
+    }
+
+    // Update the URL to reflect the current dataset
+    const params = new URLSearchParams(window.location.search);
+    params.set('id', dataset.id);
+    window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+}
+
+// Select a dataset and update the viewer
+function selectDataset(index) {
+    if (currentDataset) {
+        const duration = Date.now() - datasetStartTime;
+        if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+            umami.track('Dataset Viewed Duration', {
+                dataset: currentDataset,
+                duration_ms: duration,
+            });
         }
     }
-];
 
-function changeSlide(n) {
-    currentSlide = (currentSlide + n + datasets.length) % datasets.length;
+    currentSlide = index;
+
     updateFullScreenContent();
-    updatePicker();
+
+    const dataset = filteredDatasets[currentSlide];
+    const datasetHeadline = dataset.headline;
+
+    if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+        umami.track('Dataset Selected', { dataset: datasetHeadline });
+    }
+
+    currentDataset = datasetHeadline;
+    datasetStartTime = Date.now();
 }
 
-function updateFullScreenContent() {
-    const iframe = document.getElementById('fullscreen-iframe');
-    iframe.src = datasets[currentSlide].src;
+function initializeViewer() {
+    const idParam = getURLParameter('id');
+    const showInfoParam = getURLParameter('info');
 
-    // Update the info bullets
-    document.getElementById('flight-height').innerText = datasets[currentSlide].info.flightHeight;
-    document.getElementById('gsd').innerText = datasets[currentSlide].info.gsd;
-    document.getElementById('camera').innerText = datasets[currentSlide].info.camera;
-    document.getElementById('speed').innerText = datasets[currentSlide].info.speed;
+    if (idParam) {
+        const datasetIndex = filteredDatasets.findIndex(d => d.id === idParam);
+        if (datasetIndex !== -1) {
+            currentSlide = datasetIndex;
+        }
+    }
+
+    if (filteredDatasets.length > 0) {
+        updateFullScreenContent();
+    }
+
+    // Open the modal if showInfo=true is in the URL
+    if (showInfoParam === 'true') {
+        openInfoModal();
+    }
 }
 
-function selectDataset() {
-    const picker = document.getElementById('dataset-picker');
-    currentSlide = parseInt(picker.value, 10);
-    updateFullScreenContent();
+// Modal functions
+function openInfoModal() {
+    if (filteredDatasets.length === 0) return;
+
+    const dataset = filteredDatasets[currentSlide];
+
+    document.getElementById('modal-headline').innerText = dataset.headline;
+    document.getElementById('modal-partner').innerText = dataset.info.partnerInfo;
+    document.getElementById('modal-flightHeight').innerText = dataset.info.flightHeight;
+    document.getElementById('modal-gsd').innerText = dataset.info.gsd;
+    document.getElementById('modal-camera').innerText = dataset.info.camera;
+    document.getElementById('modal-speed').innerText = dataset.info.speed;
+    document.getElementById('modal-text').innerText = dataset.text;
+
+    const downloadButton = document.getElementById('download-dataset');
+    const caseStoryButton = document.getElementById('case-story');
+    const modalVideo = document.getElementById('modal-video');
+
+    if (dataset.downloadUrl) {
+        downloadButton.href = dataset.downloadUrl;
+        downloadButton.style.display = 'inline-block';
+    } else {
+        downloadButton.style.display = 'none';
+    }
+
+    if (dataset.caseStoryUrl) {
+        caseStoryButton.href = dataset.caseStoryUrl;
+        caseStoryButton.style.display = 'inline-block';
+    } else {
+        caseStoryButton.style.display = 'none';
+    }
+
+    if (dataset.youtubeUrl) {
+        modalVideo.src = dataset.youtubeUrl;
+        modalVideo.style.display = 'block';
+    } else {
+        modalVideo.style.display = 'none';
+    }
+
+    const modal = document.getElementById('info-modal');
+    modal.style.display = 'block';
+
+    if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+        umami.track('Info Button Clicked', { dataset: dataset.headline });
+    }
 }
 
-function updatePicker() {
-    const picker = document.getElementById('dataset-picker');
-    picker.value = currentSlide;
+function closeInfoModal() {
+    const modal = document.getElementById('info-modal');
+    modal.style.display = 'none';
+    const modalVideo = document.getElementById('modal-video');
+    modalVideo.src = ''; // Stop the video playback
 }
+
+// Close the modal when clicking outside
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('info-modal');
+    if (modal.style.display === 'block' && !event.target.closest('.modal-content') && !event.target.closest('.info-button')) {
+        closeInfoModal();
+    }
+});
+
+// Attach event listener to the Info button
+document.querySelector('.info-button').addEventListener('click', () => {
+    openInfoModal();
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    updateFullScreenContent();
-    updatePicker();
-});
+    // Inject SVG logo
+    fetch('assets/p1logo.svg')
+        .then(response => response.text())
+        .then(svgData => {
+            const logoContainer = document.getElementById('logo-container');
+            logoContainer.innerHTML = svgData;
+            const svg = logoContainer.querySelector('svg');
+            if (svg) svg.classList.add('logo');
+        })
+        .catch(err => console.error('Error loading SVG:', err));
 
+    // Apply filter, populate dropdown, and initialize viewer
+    applyFilter();
+    populateDropdown();
+    initializeViewer();
 
+    const eButton = document.querySelector('.e-button');
+    const eList = document.querySelector('.e-list');
+    const overlay = document.getElementById('overlay');
 
-
-
-
-
-// dataset picker from here
-
-document.addEventListener('DOMContentLoaded', function () {
-  const button = document.querySelector('.e-button');
-  const list = document.querySelector('.e-list');
-  const links = document.querySelectorAll('.e-list li a');
-
-  button.addEventListener('click', function () {
-    if (button.classList.contains('open')) {
-      list.style.display = 'none';
-      button.classList.remove('open');
-    } else {
-      button.classList.add('open');
-      list.style.display = 'block';
-    }
-  });
-
-  // Close the dropdown when a dataset is selected
-  links.forEach(link => {
-    link.addEventListener('click', function () {
-      list.style.display = 'none';
-      button.classList.remove('open');
-
-
-
+    // Toggle dropdown on burger menu click
+    eButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        eButton.classList.toggle('open');
+        eList.style.display = eButton.classList.contains('open') ? 'block' : 'none';
+        overlay.style.display = eButton.classList.contains('open') ? 'block' : 'none';
     });
-  });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (
+            eButton.classList.contains('open') &&
+            !event.target.closest('.e-button') &&
+            !event.target.closest('.e-list')
+        ) {
+            eButton.classList.remove('open');
+            eList.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    });
+
+    // Close modal and menu when clicking on overlay
+    overlay.addEventListener('click', () => {
+        const modal = document.getElementById('info-modal');
+        if (modal.style.display === 'block') {
+            closeInfoModal();
+        }
+        if (eButton.classList.contains('open')) {
+            eButton.classList.remove('open');
+            eList.style.display = 'none';
+        }
+        overlay.style.display = 'none';
+    });
+
+    // Close the modal when clicking outside
+    window.addEventListener('click', (event) => {
+        const modal = document.getElementById('info-modal');
+        if (modal.style.display === 'block' && !event.target.closest('.modal-content') && !event.target.closest('.info-button')) {
+            closeInfoModal();
+            overlay.style.display = 'none';
+        }
+    });
 });
 
-function selectDataset(index) {
-  // Your existing selectDataset logic to update the iframe and dataset info
-  const picker = document.getElementById('dataset-picker');
-  currentSlide = index;
-  updateFullScreenContent();
-  updatePicker(); // Update the picker if needed
-}
 
 
-
-
-
-
-
-
+window.addEventListener('beforeunload', () => {
+    if (currentDataset) {
+        const duration = Date.now() - datasetStartTime;
+        if (typeof umami !== 'undefined') {
+            umami.track('Dataset Viewed Duration', {
+                dataset: currentDataset,
+                duration_ms: duration,
+            });
+        }
+    }
+});

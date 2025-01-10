@@ -1,26 +1,17 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: #333;
   overflow: hidden;
-}
-
-a {
-    line-height: inherit;
-    color: #ffffff;
-    text-decoration: underline;
-    cursor: pointer;
 }
 
 #fullscreen-container {
   position: fixed;
   top: 0;
-  left: 0%;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
@@ -36,94 +27,30 @@ a {
   height: 100%;
   border: none;
   border-radius: 10px;
+  position: relative;
+  z-index: 1;
 }
 
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: auto;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  transition: 0.6s ease;
-  border-radius: 3px;
-  user-select: none;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.next {
-  right: 20px;
-}
-
-.prev {
-  left: 20px;
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Styles for the top bar */
 .top-bar {
-  position: fixed; /* Keeps the top bar fixed at the top of the viewport */
+  position: fixed;
   top: 0;
-  left: 0px;
+  left: 0;
   width: 100%;
   height: 65px;
-  background-color: rgb(28, 35, 51, 1);
+  background-color: rgb(28, 35, 51);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 15px;
-  box-shadow: 0px 4px 2px -2px black;
-  z-index: 1000; /* Ensures it overlays the iframe */
-}
-
-
-.top-bar .logo,
-.top-bar .dataset-info,
-.top-bar #dataset-picker {
-    margin: 0 5%; /* Adds margin to the left and right of text elements */
-}
-
-.logo {
-  height: 50px;
-}
-
-#dataset-picker {
-  font-size: 16px;
-  padding: 5px;
-}
-
-.dataset-info {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
   gap: 20px;
+  box-shadow: 0px 4px 2px -2px black;
+  z-index: 10000;
 }
 
-.dataset-info li {
-  font-size: 14px;
-  color: #f7eded;
-  
-}
-
-
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 22px;
-  margin: 0;
-  padding: 0;
-  background: #333;
-}
-
+/* M-dropdown (Change Dataset) on the far left just by being the first element */
 .m-dropdown {
-  position: relative; /* Make the container relative */
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .e-button {
@@ -132,34 +59,28 @@ body {
   font-size: 14px;
   line-height: 20px;
   padding: 8px 30px 8px 15px;
-  z-index: 900;
   color: #fff;
   font-weight: 900;
   position: relative;
   border: 2px solid transparent;
-  margin-top: 2px;
   font-family: 'Open Sans', sans-serif;
-  z-index: 5;
-  display: block;
-  width: auto;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.e-button:hover {
-  cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0);
-  color: #669999;
+.choose-dataset-text {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  margin-right: 15px;
 }
 
 .e-burger {
   transition: all .3s ease-in-out;
-  position: absolute;
-  right: 15px;
-  width: 20px; /* Adjust width to fit three lines nicely */
-  height: 18px; /* Adjust height to fit three lines */
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: -1;
+  position: relative;
+  width: 20px;
+  height: 18px;
 }
 
 .e-burger span {
@@ -184,7 +105,6 @@ body {
   bottom: 0;
 }
 
-/* Adjust for the open state */
 .e-button.open .e-burger span:nth-child(1) {
   transform: translateY(9px) rotate(-45deg);
 }
@@ -197,62 +117,201 @@ body {
   transform: translateY(-9px) rotate(45deg);
 }
 
-.e-button.open .e-burger:after {
-  height: 15px;
-  opacity: 1;
-}
-
+/* Dropdown list */
 .e-list {
   position: absolute;
-  top: 30px; /* Position it directly below the .top-bar */
-  left: -30px;
-  width: 100%; /* Make the dropdown as wide as the top bar */
-  min-width: 450px; /* Set a minimum width if needed */
-  display: none; /* Initially hidden */
-  z-index: 0; /* Ensure it appears below the burger icon */
-  background-color: #1c2333; /* Solid background color */
-  
+  top: 50px;
+  left: 0;
+  width: 200px;
+  display: none;
+  background-color: #1c2333;
+  z-index: 10001;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.e-button.open+.e-list {
+  display: block !important;
 }
 
 .e-list li {
-  display: block;
-  width: auto;
+  width: 100%;
   box-sizing: border-box;
-  opacity: 1; /* Ensure full opacity */
-}
-
-.e-list li:last-child {
-  border: none;
-  
+  opacity: 1;
+  padding: 10px 15px;
 }
 
 .e-list li a {
-  transition: all .3s ease-in-out;
-  padding: 25px;
-  float: left;
-  width: auto;
-  min-width: 100%; /* Ensures the dropdown is at least as wide as the button */
   text-decoration: none;
   color: #fff;
-  background-color: #1c2333; /* Solid background color */
+  display: block;
+  width: 100%;
   font-weight: 600;
-  box-sizing: border-box;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
 }
 
-.e-list li a:hover {
-  background: #1c2333;
-  color: #313849;
+.e-list li:hover {
+  background-color: #313849;
 }
 
-.e-button.open + .e-list {
-  opacity: 1 !important; /* Override any transparency applied during animation */
-  
+.filter-menu {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.filter-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.filter-menu a:hover {
+  color: #669999;
+}
+
+.info-button {
+  background: #00affc;
+  border: none;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: #007fb3;
+}
+
+/* Logo on the far right */
+#logo-container {
+  margin-left: auto;
+  /* pushes logo to the far right */
+}
+
+#logo-container .logo {
+  height: 45px;
+  display: block;
+}
+
+/* Make the logo white */
+#logo-container .logo path {
+  fill: #fff !important;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(1px);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  position: relative;
+  color: #333;
+  z-index: 100000;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
-  .prev, .next, 
-  .m-dropdown .e-button span a svg {
+  #logo-container {
+    display: none !important;
+  }
+
+  .filter-menu a {
+    margin: 0 5px;
+  }
+
+  .choose-dataset-text {
     display: none;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+  }
+}
+
+.current-dataset {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-button {
+  display: inline-block;
+  background-color: #00B9F2;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin: 10px 5px;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 9998;
+  /* Below modal and menu but above iframe */
+}
+
+#modal-video {
+  height: 300px;
+  /* Adjust as needed */
+  margin-top: 15px;
+  border: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .current-dataset {
+    display: none;
+    /* Or truncate if preferred */
   }
 }
