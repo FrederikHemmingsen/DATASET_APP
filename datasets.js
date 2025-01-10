@@ -217,17 +217,17 @@ const datasets = [
         id: 'dynamic-house',
         src: 'Tools/BAF/DynamicRange/house.html',
         headline: 'Dynamic Range',
-        type: 'p3',
+        type: 'toolbox',
         info: {
             partnerInfo: 'Phase One',
             flightHeight: '60',
-            gsd: '0.25',
+            gsd: '0.25 cm',
             camera: 'GS120',
             speed: '0 m/s'
         },
         text: "The Phase One camera, combined with IIQ files, is the perfect solution for drone photography in demanding lighting conditions. Its exceptional dynamic range ensures critical details are preserved in both shadows and highlights, even when capturing images against the sun or in high-contrast environments. This capability is vital for professionals who rely on accurate and usable data for analysis, mapping, and inspection. With Phase One, you get unmatched image quality and post-processing flexibility, making it the ideal choice for aerial photography where precision matters most.",
         downloadUrl: "",
-        caseStoryUrl: "https://www.phaseone.com/solutions/geospatial-solutions/uav-payloads/",
+        caseStoryUrl: "https://www.phaseone.com/solutions/geospatial-solutions/uav-payloads/?utm_source=datasetviewer&utm_medium=website&utm_campaign=GEO_Datasetviewer",
         youtubeUrl: "https://www.youtube.com/embed/afKahiF7mL4"
     }
     ,
@@ -235,20 +235,37 @@ const datasets = [
         id: 'dynamic-house_p5',
         src: 'Tools/BAF/DynamicRange/house.html',
         headline: 'Dynamic Range',
-        type: 'p5',
+        type: 'hidden',
         info: {
             partnerInfo: 'Phase One',
             flightHeight: '60',
-            gsd: '0.25',
+            gsd: '0.25 cm',
             camera: 'GS120',
             speed: '0 m/s'
         },
         text: "The Phase One camera, combined with IIQ files, is the perfect solution for drone photography in demanding lighting conditions. Its exceptional dynamic range ensures critical details are preserved in both shadows and highlights, even when capturing images against the sun or in high-contrast environments. This capability is vital for professionals who rely on accurate and usable data for analysis, mapping, and inspection. With Phase One, you get unmatched image quality and post-processing flexibility, making it the ideal choice for aerial photography where precision matters most.",
         downloadUrl: "",
-        caseStoryUrl: "https://www.phaseone.com/solutions/geospatial-solutions/uav-payloads/",
+        caseStoryUrl: "https://www.phaseone.com/solutions/geospatial-solutions/uav-payloads/?utm_source=datasetviewer&utm_medium=website&utm_campaign=GEO_Datasetviewer",
         youtubeUrl: "https://www.youtube.com/embed/afKahiF7mL4"
     }
-
+    ,
+    {
+        id: 'Pas880-Ljubljana',
+        src: 'https://www.arcgis.com/home/webscene/viewer.html?disableFeatures=im-shading&webscene=68fe59a173784eabb94752f237684259',
+        headline: 'Ljubljana',
+        type: 'PAS',
+        info: {
+            partnerInfo: 'Flycom Technologies',
+            flightHeight: '1400',
+            gsd: '5 cm',
+            camera: 'PAS 880',
+            speed: '60 m/s'
+        },
+        text: "Slovenia’s Surveying and Mapping Authority (GURS) partnered with Flycom Technologies and Phase One in 2023 to create 3D city models of Ljubljana, Bled, and Murska Sobota. Using the PAS 880i Oblique Camera System, high-resolution oblique and nadir images were captured efficiently, covering 176 km² in total. These images enabled the generation of orthophotos, 3D meshes, and digital surface models, essential for urban planning, disaster response, and infrastructure inspection. The detailed imagery also captured vertical surfaces, such as buildings and cliffs, enhancing analysis capabilities. This project demonstrates the potential of advanced 3D data in streamlining government operations and decision-making processes.",
+        downloadUrl: "",
+        caseStoryUrl: "https://www.phaseone.com/inspiration/revolutionizing-slovenian-urban-planning/?utm_source=datasetviewer&utm_medium=website&utm_campaign=GEO_Datasetviewer",
+        youtubeUrl: "https://www.youtube.com/embed/SVBfK1TS9Go"
+    }
 
 
 

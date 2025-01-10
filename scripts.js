@@ -15,15 +15,19 @@ function getURLParameter(name) {
 function applyFilter() {
     const filterParam = getURLParameter('filter') || 'all';
     if (filterParam === 'all') {
-        filteredDatasets = datasets.filter(d => d.type === 'p3' || d.type === 'p5');
+        filteredDatasets = datasets.filter(d => d.type === 'p3' || d.type === 'p5' || d.type === 'PAS');
     } else if (filterParam === 'p3') {
         filteredDatasets = datasets.filter(d => d.type === 'p3');
     } else if (filterParam === 'p5') {
         filteredDatasets = datasets.filter(d => d.type === 'p5');
+    } else if (filterParam === 'PAS') {
+        filteredDatasets = datasets.filter(d => d.type === 'PAS');
+    } else if (filterParam === 'toolbox') {
+        filteredDatasets = datasets.filter(d => d.type === 'toolbox');
     } else if (filterParam === 'hidden') {
         filteredDatasets = datasets.filter(d => d.type === 'hidden');
     } else {
-        filteredDatasets = datasets.filter(d => d.type === 'p3' || d.type === 'p5'); // Default to P3 and P5
+        filteredDatasets = datasets.filter(d => d.type === 'p3' || d.type === 'p5' || d.type === 'PAS'); // Default to P3 and P5
     }
 }
 
