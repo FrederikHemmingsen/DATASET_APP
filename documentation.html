@@ -24,10 +24,23 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        h1,
-        h2,
+        h1 {
+            color: #bbdefb;
+            text-align: center;
+        }
+
+
+        h2 {
+            color: #bbdefb;
+        }
+
+
         h3 {
-            color: #ffffff;
+            color: #bbdefb;
+        }
+
+        h4 {
+            color: #bbdefb;
         }
 
         code {
@@ -76,6 +89,23 @@
         .iframe-guide h3 {
             color: #bbdefb;
         }
+
+        .nav-links {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #333333;
+            border-radius: 8px;
+        }
+
+        .nav-links a {
+            margin-right: 15px;
+            color: #64b5f6;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -83,11 +113,19 @@
     <div class="container">
         <h1>PhaseOne Viewer Documentation</h1>
 
-        <h2>Overview</h2>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#new-features">New Features</a>
+            <a href="#how-to-use">How to Use</a>
+            <a href="#embedding-the-viewer">Embedding the Viewer</a>
+            <a href="#adding-as-app">Adding the Website as an App</a>
+        </div>
+
+        <h2 id="overview">Overview</h2>
         <p>The PhaseOne Viewer provides a interface to explore and interact with datasets dynamically. This
             documentation outlines the new features, changes, and usage instructions for the viewer.</p>
 
-        <h2>New Features</h2>
+        <h2 id="new-features">New Features</h2>
         <ul>
             <li><strong>Dynamic Info Popup:</strong> Displays detailed information about datasets, including video
                 embeds and actionable buttons.</li>
@@ -103,7 +141,7 @@
                 respective areas.</li>
         </ul>
 
-        <h2>How to Use</h2>
+        <h2 id="how-to-use">How to Use</h2>
 
         <h3>Dataset Filtering</h3>
         <p>Use the following URL parameters to filter datasets:</p>
@@ -111,6 +149,8 @@
             <li><code>?filter=all</code> - Shows all datasets (default).</li>
             <li><code>?filter=p3</code> - Shows only P3 datasets.</li>
             <li><code>?filter=p5</code> - Shows only P5 datasets.</li>
+            <li><code>?filter=pas</code> - Shows only PAS datasets.</li>
+            <li><code>?filter=hidden</code> - Shows only Hidden datasets.</li>
 
         </ul>
 
@@ -121,7 +161,7 @@
             <li>Click the <strong>Info</strong> button in the top bar to open it manually.</li>
         </ul>
 
-        <h3>Embedding the Viewer</h3>
+        <h2 id="embedding-the-viewer">Embedding the Viewer</h2>
         <p>The viewer can be embedded on any webpage using an iframe. Below are the steps and examples:</p>
 
         <div class="iframe-guide">
@@ -167,6 +207,36 @@
 }</code></pre>
 
         </div>
+
+        <h2 id="adding-as-app">Adding the Website as an App</h2>
+        <p>You can add the PhaseOne Viewer website as an app for quick access. Follow the steps below based on your
+            device or browser:</p>
+
+        <h4>Chrome on Desktop</h4>
+        <ul>
+            <li>Open the website in Google Chrome.</li>
+            <li>Click on the three-dot menu in the top-right corner.</li>
+            <li>Select <strong>More tools</strong> &gt; <strong>Create shortcut...</strong></li>
+            <li>Check the box for <strong>Open as window</strong> and click <strong>Create</strong>.</li>
+        </ul>
+
+        <h4>Chrome on Android</h4>
+        <ul>
+            <li>Open the website in Chrome on your Android device.</li>
+            <li>Tap the three-dot menu in the top-right corner.</li>
+            <li>Select <strong>Add to Home screen</strong>.</li>
+            <li>Enter a name for the app and tap <strong>Add</strong>.</li>
+        </ul>
+
+        <h4>Safari on iOS</h4>
+        <ul>
+            <li>Open the website in Safari on your iPhone or iPad.</li>
+            <li>Tap the <strong>Share</strong> button (square with an arrow pointing up).</li>
+            <li>Select <strong>Add to Home Screen</strong>.</li>
+            <li>Enter a name for the app and tap <strong>Add</strong>.</li>
+        </ul>
+
+    </div>
 </body>
 
 </html>
