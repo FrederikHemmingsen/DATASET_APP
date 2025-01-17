@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viewer.js - Fullscreen by Default</title>
+
+  <!-- Viewer.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.11.2/dist/viewer.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Simple spinner styles */
+    .spinner-overlay {
+      position: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      z-index: 9999;
+      /* Make sure it stays on top of everything */
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 6px solid #ccc;
+      border-top-color: #333;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .gallery {
+      display: none;
+      /* Hide the thumbnails since we open in fullscreen */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Spinner overlay -->
+  <div id="spinnerOverlay" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="gallery" id="imageGallery">
+    <img src="1.jpg" alt="Placeholder 1">
+    <img src="2.jpg" alt="Placeholder 2">
+    <img src="3.jpg" alt="Placeholder 3">
+    <img src="4.jpg" alt="Placeholder 4">
+    <img src="5.jpg" alt="Placeholder 5">
+    <img src="6.jpg" alt="Placeholder 6">
+    <img src="7.jpg" alt="Placeholder 7">
+    <img src="8.jpg" alt="Placeholder 8">
+    <img src="9.jpg" alt="Placeholder 9">
+    <img src="10.jpg" alt="Placeholder 10">
+    <img src="11.jpg" alt="Placeholder 11">
+    <img src="12.jpg" alt="Placeholder 12">
+  </div>
+
+  <!-- Viewer.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.11.2/dist/viewer.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const gallery = document.getElementById("imageGallery");
+      const spinnerOverlay = document.getElementById("spinnerOverlay");
+
+      // Initialize Viewer.js
+      const viewer = new Viewer(gallery, {
+        inline: false,       // Enable modal mode
+        navbar: true,        // Show thumbnails in navbar
+        title: false,        // Show image titles
+        toolbar: false,      // Show toolbar for zoom, rotate, etc.
+        keyboard: true,      // Enable keyboard shortcuts
+        tooltip: true,       // Show zoom ratio on hover
+        movable: true,       // Allow dragging to move image
+        zoomable: true,      // Allow zooming the image
+        scalable: true,      // Allow scaling the image
+        loop: true,          // Loop navigation
+        button: false,
+        focus: true,         // Focus the viewer for keyboard input
+        backdrop: false,     // Enable backdrop in modal
+        transition: true,    // Enable smooth transitions
+        zoomRatio: 0.2,      // Zoom step ratio
+        minZoomRatio: 0.1,   // Minimum zoom ratio
+        maxZoomRatio: 2,     // Maximum zoom ratio
+        slideOnTouch: true,  // Enable touch navigation
+        toggleOnDblclick: true, // Enable zoom toggle on double-click
+
+        // When the viewer is ready, hide the spinner
+        ready() {
+          console.log("Viewer is ready!");
+          spinnerOverlay.style.display = 'none';
+        },
+      });
+
+      // Automatically show the viewer on the first image once it's loaded
+      gallery.querySelectorAll('img')[0].onload = () => {
+        viewer.show();
+      };
+    });
+  </script>
+</body>
+
+</html>

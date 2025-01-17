@@ -265,6 +265,23 @@ const datasets = [
         downloadUrl: "",
         caseStoryUrl: "https://www.phaseone.com/inspiration/revolutionizing-slovenian-urban-planning/?utm_source=datasetviewer&utm_medium=website&utm_campaign=GEO_Datasetviewer",
         youtubeUrl: "https://www.youtube.com/embed/SVBfK1TS9Go"
+    },
+    {
+        id: 'MIO',
+        src: 'Tools/Gallery/Tuscan/tuscan.html',
+        headline: 'MIO',
+        type: 'hidden',
+        info: {
+            partnerInfo: '',
+            flightHeight: '',
+            gsd: '',
+            camera: '',
+            speed: ''
+        },
+        text: "",
+        downloadUrl: "",
+        caseStoryUrl: "",
+        youtubeUrl: ""
     }
 
 
