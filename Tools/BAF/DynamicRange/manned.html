@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Fullscreen Responsive Image Compare Viewer</title>
+  <!-- Image Compare Viewer CSS -->
+  <link rel="stylesheet" href="../image-compare-viewer.min.css?v=1.0">
+
+  <!-- Preload Images (Optional) -->
+  <!--
+  <link rel="preload" as="image" href="m2.jpeg">
+  <link rel="preload" as="image" href="m3.jpeg">
+  -->
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      /* Prevent scrolling */
+    }
+
+    #image-compare {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Image Compare Viewer Container -->
+  <div id="image-compare">
+    <img id="before-image" src="m2.jpeg" alt="Before">
+    <img id="after-image" src="m3.jpg" alt="After">
+  </div>
+
+  <!-- Image Compare Viewer JS -->
+  <script src="../image-compare-viewer.min.js?v=1.0"></script>
+  <script>
+    // Using a simple onload approach instead of decode()
+    window.onload = () => {
+      const beforeImage = document.getElementById('before-image');
+      const afterImage = document.getElementById('after-image');
+
+      let imagesLoaded = 0;
+      function onImageLoad() {
+        imagesLoaded++;
+        if (imagesLoaded === 2) {
+          initializeSlider();
+        }
+      }
+
+      // Attach onload events
+      beforeImage.onload = onImageLoad;
+      afterImage.onload = onImageLoad;
+
+      // If the images are already cached and complete
+      if (beforeImage.complete) onImageLoad();
+      if (afterImage.complete) onImageLoad();
+
+      function initializeSlider() {
+        try {
+          const element = document.getElementById('image-compare');
+          new ImageCompare(element, {
+            controlColor: "#FFFFFF",
+            addCircle: true,
+            showLabels: true,
+            smoothing: true,
+            startingPoint: 50,
+            fluidMode: true, // Ensures responsiveness
+          }).mount();
+        } catch (error) {
+          console.error('Error initializing ImageCompare:', error);
+        }
+      }
+    };
+  </script>
+</body>
+
+</html>

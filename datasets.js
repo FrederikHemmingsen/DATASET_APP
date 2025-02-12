@@ -282,8 +282,58 @@ const datasets = [
         downloadUrl: "",
         caseStoryUrl: "",
         youtubeUrl: ""
+    },
+    {
+        id: 'MIO2',
+        src: 'Tools/BAF/DynamicRange/manned.html',
+        headline: 'MIO2',
+        type: 'hidden',
+        info: {
+            partnerInfo: 'Phase One',
+            flightHeight: '60',
+            gsd: '0.25 cm',
+            camera: 'GS120',
+            speed: '0 m/s'
+        },
+        text: "The Phase One camera, combined with IIQ files, is the perfect solution for drone photography in demanding lighting conditions. Its exceptional dynamic range ensures critical details are preserved in both shadows and highlights, even when capturing images against the sun or in high-contrast environments. This capability is vital for professionals who rely on accurate and usable data for analysis, mapping, and inspection. With Phase One, you get unmatched image quality and post-processing flexibility, making it the ideal choice for aerial photography where precision matters most.",
+        downloadUrl: "",
+        caseStoryUrl: "https://www.phaseone.com/solutions/geospatial-solutions/uav-payloads/?utm_source=datasetviewer&utm_medium=website&utm_campaign=GEO_Datasetviewer",
+        youtubeUrl: "https://www.youtube.com/embed/afKahiF7mL4"
+    },
+    {
+        id: 'TinCup',
+        src: 'https://proxyembed.replit.app/',
+        headline: 'TinCup',
+        type: 'hidden',
+        info: {
+            partnerInfo: 'verus.digital',
+            flightHeight: '60',
+            gsd: '0.25 cm',
+            camera: 'GS120',
+            speed: '0 m/s'
+        },
+        text: "CultArm3D is the first mobile all-in-one solution for 3D digitization. Its modular design offers maximum versatility. Available in two versions, desktop and floorstanding, CultArm3D can be customized with various add-on modules to serve different purposes. We also offer digitization services as well as consulting, helping customers to find project-based solutions tailored to their needs.",
+        downloadUrl: "",
+        caseStoryUrl: "https://verus.digital",
+        youtubeUrl: "https://player.vimeo.com/video/768085316"
+    },
+    {
+        id: 'Elephant',
+        src: 'https://proxyembed.replit.app/index2.html',
+        headline: 'Elephant',
+        type: 'hidden',
+        info: {
+            partnerInfo: 'verus.digital',
+            flightHeight: '',
+            gsd: '',
+            camera: '',
+            speed: ''
+        },
+        text: "CultArm3D is the first mobile all-in-one solution for 3D digitization. Its modular design offers maximum versatility. Available in two versions, desktop and floorstanding, CultArm3D can be customized with various add-on modules to serve different purposes. We also offer digitization services as well as consulting, helping customers to find project-based solutions tailored to their needs.",
+        downloadUrl: "",
+        caseStoryUrl: "https://verus.digital",
+        youtubeUrl: "https://player.vimeo.com/video/768085316"
     }
-
 
 
 ];
